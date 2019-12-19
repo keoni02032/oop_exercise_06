@@ -8,9 +8,9 @@
 
 int main() {
     int posision;
-    containers::queue<rhombus<int>, my_allocator<rhombus<int>, 1000>> q;
+    containers::queue<rhombus<int>, all::my_allocator<rhombus<int>, 100>> q;
 
-    std::map<int, int, std::less<>, my_allocator<std::pair<const int, int>, 1000>> mp;
+    std::map<int, int, std::less<>, all::my_allocator<std::pair<const int, int>, 1000>> mp;
             for (int i = 0; i < 8; i++) {
                 mp[i] = i * i;
             }
@@ -44,7 +44,7 @@ int main() {
             break;
         } else if (command == 6) {
 
-            std::map<int, int, std::less<>, my_allocator<std::pair<const int, int>, 1000>> mp;
+            std::map<int, int, std::less<>, all::my_allocator<std::pair<const int, int>, 1000>> mp;
             for (int i = 0; i < 6; i++) {
                 mp[i] = i * i;
             }

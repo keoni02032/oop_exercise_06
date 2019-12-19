@@ -164,7 +164,8 @@ namespace containers {
         if (first == nullptr) {
             throw std::logic_error ("queue is empty");
         }
-        first = std::move(first->next_element);
+        auto tmp = std::move(first->next_element);
+        first = std::move(tmp);
     }
 
     template <class T, class Allocator>
@@ -178,7 +179,6 @@ namespace containers {
         }
         endl->next_element = unique_ptr(result, deleter{&this->allocator_});
         endl = endl->next_element.get();
-
     }
 
     template <class T, class Allocator>

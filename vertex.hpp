@@ -1,3 +1,5 @@
+//бергер 4-5 \лекционный материал
+
 #ifndef D_VERTEX_HPP_
 #define D_VERTEX_HPP_ 1
 
