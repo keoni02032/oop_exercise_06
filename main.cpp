@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 #include <algorithm>
 #include <map>
 
@@ -8,7 +9,7 @@
 
 int main() {
     int posision;
-    containers::queue<rhombus<int>, all::my_allocator<rhombus<int>, 100>> q;
+    containers::queue<rhombus<int>, all::my_allocator<rhombus<int>, 300>> q;
 
     std::map<int, int, std::less<>, all::my_allocator<std::pair<const int, int>, 1000>> mp;
             for (int i = 0; i < 8; i++) {
@@ -23,6 +24,7 @@ int main() {
               << "4 - erase_to_num\n"
               << "5 - for_each\n"
               << "6 - map\n"
+              << "7 - insert_to_num"
               << "0 - exit\n";
 
     for (;;) {
@@ -50,6 +52,16 @@ int main() {
             }
             std::for_each(mp.begin(), mp.end(), [](std::pair<int, int> X) {std::cout << X.first << " " << X.second << ", ";});
             std::cout << std::endl;
+        } else if (command == 7) {
+            // int posision;
+            // std::cin >> posision;
+            // rhombus<int> rhomb(std::cin);
+            // auto it = posision;
+            // q.insert_to_num(it, rhomb);
+            int r;
+            std::cin >>r;
+            rhombus<int> rhomb(std::cin);
+            q.insert_to_num(r, rhomb);
         } else {
             std::cout << "ERROR" << std::endl;
             continue;

@@ -39,6 +39,10 @@ namespace containers {
         forward_iterator begin();
         forward_iterator end();
 
+        void pop();
+        void push(const T& value);
+        T& top();
+
         void insert(forward_iterator& it, const T& value);
         void insert_to_num(int pos, const T& value);
         void erase(forward_iterator it);
@@ -46,11 +50,6 @@ namespace containers {
         bool empty() {
             return first == nullptr;
         }
-
-        void pop();
-        void push(const T& value);
-        T& top();
-
     private:
 
         using allocator_type = typename Allocator::template rebind<element>::other;
@@ -110,8 +109,63 @@ namespace containers {
 
     template <class T, class Allocator>
     void queue<T, Allocator>::insert(containers::queue<T, Allocator>::forward_iterator& ptr, const T& value) {
-        auto val = std::unique_ptr<element>(new element{value});
+        // element* newptr = this->allocator_.allocate(1);
+        // // auto val = std::unique_ptr<element, deleter{&this->allocator_}>(new element{value});
+        // // std::unique_ptr<element, deleter{nullptr}> val = std::unique_ptr<element, deleter{nullptr}>(new element{ value });
+        // std::allocator_traits<allocator_type>::construct(this->allocator_,value, std::unique_ptr<element, deleter>(nullptr, deleter{&this->allocator_}));
+        // unique_ptr = new_node(newptr, deleter{&this->allocator_});
+
+        // forward_iterator it = this->begin();
+        // if (ptr == this->begin()) {
+        //     val->next_element = std::move(first);
+        //     first = std::move(new_node);
+        //     return;
+        // }
+        // while ((it.ptr_ != nullptr) && (it.ptr_->next() != ptr)) {
+        //     ++it;
+        // }
+        // if (it.ptr_ == nullptr) {
+        //     throw std::logic_error ("ERROR");
+        // }
+        // new_node->next_element = std::move(it.ptr_->next_element);
+        // it.ptr_->next_element = std::move(new_node);
+        
+
+
+
+        // element* newptr = this->allocator_.allocate(1);
+        // // std::allocator_traits<allocator_type>::construct(this->allocator_,value, std::unique_ptr<element, deleter>(nullptr, deleter{&this->allocator_}));
+        // unique_ptr = new_node(newptr, deleter{&this->allocator_});
+
+        // if (it.ptr_ == nullptr) {
+        //     throw std::logic_error("iterator went beyond the bounds of the stack");
+        // } else if (it.ptr_ == nullptr) {
+        //     first = std::unique_ptr<element>(new element(value, nullptr));
+        // } else {
+        //     new_node->next_element = std::move(it.ptr_->next_element);
+        //     it.ptr_->next_element = std::move(new_node);
+        // }
+
+
+
+        element* NewNode = this->allocator_.allocate(1);
+        std::allocator_traits<allocator_type>::construct(this->allocator_, NewNode, value);
+        auto val = unique_ptr(NewNode, deleter{&this->allocator_});
+        //auto tmp = std::unique_ptr<Node>(new Node{value});
         forward_iterator it = this->begin();
+        // while ((i.ptr_ != nullptr) && (i.ptr_->next() != ptr)) {
+        //     if (i.ptr_ == nullptr) throw std::logic_error("Out of range\n");
+        //     ++i;
+
+        // }
+        // if (i.ptr_->next_element == nullptr) {
+        //     i.ptr_->next_element = std::move(tmp);
+        //     return;
+        // }
+        // ++i;
+        // tmp->next_element = std::move(i.ptr_->next_element);
+        // i.ptr_->next_element = std::move(tmp);
+        // return;
         if (ptr == this->begin()) {
             val->next_element = std::move(first);
             first = std::move(val);
